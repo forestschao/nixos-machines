@@ -29,6 +29,17 @@
 
   outputs = { self, nixpkgs, nixos-hardware, vital-modules, nixos-home, ... }@inputs: {
     nixosConfigurations = {
+      foundation = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          vital-modules.nixosModules.iphone-connect
+          vital-modules.nixosModules.docker
+          # nixos-home.nixosModules.breakds-home
+          ./machines/foundation
+        ];
+      };
+      
       samaritan = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
