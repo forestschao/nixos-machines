@@ -61,7 +61,7 @@
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
     vital.programs.accounting.enable = true;
-    vital.programs.machine-learning.enable = true;
+    vital.programs.machine-learning.enable = false;
     
     environment.systemPackages = with pkgs; [
       gimp

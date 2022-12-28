@@ -8,47 +8,36 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4fa202de-50a4-44ab-99f8-1d1ee2d6b3a1";
+    { device = "/dev/disk/by-uuid/fb4307b8-137c-4390-84a8-8998debb9d0a";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/A0C5-5BE5";
+    { device = "/dev/disk/by-uuid/4BD9-6B1F";
       fsType = "vfat";
     };
 
-  fileSystems."/home" = {
-    device = "/dev/disk/by-label/BDS_HOME";
-    fsType = "ext4";
-  };
-
-  fileSystems."/home/breakds/backup" = {
-    device = "/dev/disk/by-label/BDS_BACKUP";
-    fsType = "ext4";
-    options = [ "auto" "nofail" ];
-  };
-
-  fileSystems."/var/lib/filerun" = {
-    device = "/dev/disk/by-label/NAS_DATA";
-    fsType = "ext4";
-    options = [ "auto" "nofail" ];
-  };
-
-  swapDevices = [ ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/17593cf3-5037-43bb-8753-e4bd2ecdf889"; }
+    ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp9s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp1s0f2u1u1.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
 
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # high-resolution display
+  hardware.video.hidpi.enable = lib.mkDefault true;
 }
