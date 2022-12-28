@@ -62,11 +62,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1672212507,
-        "narHash": "sha256-vOg8e3IHKUK2EK+5Ir7DVi2buGd1ZGOpv6FBCtsWMpU=",
+        "lastModified": 1672213152,
+        "narHash": "sha256-d2+NYNNz+k++o6GDX2Si3wmDdul1mbakV5bLB128cYg=",
         "owner": "forestschao",
         "repo": "nixos-home",
-        "rev": "4cb3d0a587ce6bbe6167278aa6da3c59e06156e7",
+        "rev": "c8bfc1f91fd1ef18f21a6002c225ac8c273b0a0c",
         "type": "github"
       },
       "original": {
