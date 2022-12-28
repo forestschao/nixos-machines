@@ -13,7 +13,7 @@
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
-    nixos-home.url = "github:breakds/nixos-home";
+    nixos-home.url = "github:forestschao/nixos-home";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
 
     www-breakds-org.url = "github:breakds/www.breakds.org";
@@ -35,7 +35,7 @@
           vital-modules.nixosModules.foundation
           vital-modules.nixosModules.iphone-connect
           vital-modules.nixosModules.docker
-          # nixos-home.nixosModules.breakds-home
+          nixos-home.nixosModules.chao-home
           ./machines/foundation
         ];
       };

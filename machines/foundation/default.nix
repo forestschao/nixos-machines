@@ -49,6 +49,10 @@
       #     wol -i <ip> <mac>
       # interfaces."enp6s0".wakeOnLan.enable = true;
     # };
+    nixpkgs.config.permittedInsecurePackages = [
+      "python3.10-poetry-1.2.2"
+      "python3.10-certifi-2022.9.24"
+    ];
 
     vital.graphical = {
       enable = true;
@@ -94,6 +98,6 @@
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
     system.stateVersion = "22.05"; # Did you read the comment?
-    # home-manager.users."chao".home.stateVersion = "22.05";
+    home-manager.users."chao".home.stateVersion = "22.05";
   };
 }
