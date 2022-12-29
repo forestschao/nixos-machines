@@ -58,6 +58,7 @@
       enable = true;
       remote-desktop.enable = true;
       nvidia.enable = true;
+      xserver.dpi = 120;
     };
 
     vital.pre-installed.level = 5;
