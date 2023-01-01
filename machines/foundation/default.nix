@@ -83,6 +83,7 @@
       trezor-suite
       inkscape
       element-desktop
+      xclip
     ];
 
     # Trezor cryptocurrency hardware wallet

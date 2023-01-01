@@ -26,7 +26,7 @@
           set tabstop=2
           set shiftwidth=2
           set expandtab
-          set clipboard=unnamedplus
+          set clipboard+=unnamedplus
           set incsearch
           set hlsearch
           set ic
