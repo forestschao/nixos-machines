@@ -52,19 +52,19 @@
     # allowSFTP = config.vital.machineType == "server";
   };
 
-  services.avahi = {
-    enable = true;
+  # services.avahi = {
+  #   enable = true;
 
-    # Whether to enable the mDNS NSS (Name Service Switch) plugin.
-    # Enabling this allows applications to resolve names in the
-    # `.local` domain.
-    nssmdns = true;
+  #   # Whether to enable the mDNS NSS (Name Service Switch) plugin.
+  #   # Enabling this allows applications to resolve names in the
+  #   # `.local` domain.
+  #   nssmdns = true;
 
-    # Whether to register mDNS address records for all local IP
-    # addresses.
-    publish.enable = true;
-    publish.addresses = true;
-  };
+  #   # Whether to register mDNS address records for all local IP
+  #   # addresses.
+  #   publish.enable = true;
+  #   publish.addresses = true;
+  # };
 
   services.blueman.enable = true;
 

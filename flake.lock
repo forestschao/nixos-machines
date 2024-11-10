@@ -25,11 +25,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1688798314,
-        "narHash": "sha256-MFG5rx7L756rtrPHsL662m64AZ4sKqUcApaiYgSKfNM=",
+        "lastModified": 1730919458,
+        "narHash": "sha256-yMO0T0QJlmT/x4HEyvrCyigGrdYfIXX3e5gWqB64wLg=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "47dca15d86fdd2eabcf434d7cc0b5baa8d1a463c",
+        "rev": "e1cc1f6483393634aee94514186d21a4871e78d7",
         "type": "github"
       },
       "original": {
@@ -119,6 +119,21 @@
         "www-breakds-org": "www-breakds-org"
       }
     },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "utils": {
       "locked": {
         "lastModified": 1667395993,
@@ -135,12 +150,15 @@
       }
     },
     "utils_2": {
+      "inputs": {
+        "systems": "systems"
+      },
       "locked": {
-        "lastModified": 1623875721,
-        "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "f7e004a55b120c02ecb6219596820fcd32ca8772",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
         "type": "github"
       },
       "original": {
@@ -156,11 +174,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1686246202,
-        "narHash": "sha256-EuMBEz5fd0OtrBCsuT9bu5rKhSWGDrQRgdQSkReCMK0=",
+        "lastModified": 1725815419,
+        "narHash": "sha256-DjiIpbaHH3VtuFpTkmMHDxtp79qCHBbxFWu/aY1I1vw=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "dff4c5234e5c4402a0db42ef15fcd00bc1f6ea0f",
+        "rev": "c4b9badcf44897a2d24b9106edd817d73e7277de",
         "type": "github"
       },
       "original": {
@@ -177,11 +195,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1681602556,
-        "narHash": "sha256-qYj+pnVTBxXm7XgLTZ5gYsWtnh71kmeFDz91IjTY7Vo=",
+        "lastModified": 1724584698,
+        "narHash": "sha256-29/hAVsMpwEzkilr9CCUZb2NXBAghEo92QTAuzbi3G8=",
         "owner": "breakds",
         "repo": "www.breakds.org",
-        "rev": "a8a68f098e7fd8bec66327ae994b16cd7a1ca4a1",
+        "rev": "2ca12e346f1da12051c9144047b571f51588ea1d",
         "type": "github"
       },
       "original": {

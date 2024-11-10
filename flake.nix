@@ -33,8 +33,8 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          vital-modules.nixosModules.iphone-connect
-          vital-modules.nixosModules.docker
+          # vital-modules.nixosModules.iphone-connect
+          # vital-modules.nixosModules.docker
           nixos-home.nixosModules.chao-home
           ./machines/foundation
         ];
