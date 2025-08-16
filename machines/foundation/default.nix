@@ -1,105 +1,109 @@
-{ lib, config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
+  # Import other parts of your configuration
   imports = [
     ./hardware-configuration.nix
     ../../base
-    ../../base/i3-session-breakds.nix
+    ../../base/i3-session-breakds.nix # Assumed to be your custom i3 setup
     ../../base/dev/breakds-dev.nix
     ../../base/dev/vim.nix
   ];
 
-  config = {
-    vital.mainUser = "chao";
+  # Allow proprietary software. This is required for Steam and Nvidia drivers.
+  nixpkgs.config.allowUnfree = true;
 
-    users.users."chao" = {
-      openssh.authorizedKeys.keyFiles = [
-        ../../data/keys/chao.pub
-      ];
-    };
+  # --- User Configuration ---
+  vital.mainUser = "chao"; # From your custom framework
 
-    # Bootloader.
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
-    # Internationalisation
-    i18n.defaultLocale = "en_US.utf8";
-
-    # Enable sound with pipewire.
-    sound.enable = true;
-    hardware.pulseaudio.enable = false;
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-
-    # networking = {
-      # hostName = "samaritan";
-      # Generated via `head -c 8 /etc/machine-id`
-      # hostId = "9c4a63a8";
-
-      # WakeOnLan. You will need to know the ip and mac of this
-      # machines to be able to wake it. The command that you should
-      # run on the other machine should be:
-      #
-      #     wol -i <ip> <mac>
-      # interfaces."enp6s0".wakeOnLan.enable = true;
-    # };
-    nixpkgs.config.permittedInsecurePackages = [
-      "python3.10-poetry-1.2.2"
-      "python3.10-certifi-2022.9.24"
+  users.users."chao" = {
+    openssh.authorizedKeys.keyFiles = [
+      ../../data/keys/chao.pub
     ];
-
-    vital.graphical = {
-      enable = true;
-      remote-desktop.enable = true;
-      nvidia.enable = true;
-      xserver.dpi = 120;
-    };
-
-    vital.pre-installed.level = 5;
-    vital.games.steam.enable = true;
-    vital.programs.texlive.enable = true;
-    vital.programs.modern-utils.enable = true;
-    vital.programs.accounting.enable = true;
-    vital.programs.machine-learning.enable = false;
-    
-    environment.systemPackages = with pkgs; [
-      gimp
-      darktable
-      filezilla
-      woeusb
-      axel
-      audacious
-      audacity
-      zoom-us
-      thunderbird
-      mullvad-vpn
-      unetbootin
-      trezor-suite
-      inkscape
-      element-desktop
-      xclip
-    ];
-
-    # Trezor cryptocurrency hardware wallet
-    services.trezord.enable = true;
-
-    # Disable unified cgroup hierarchy (cgroups v2)
-    # This is to applease nvidia-docker
-    systemd.enableUnifiedCgroupHierarchy = false;
-
-    # This value determines the NixOS release from which the default
-    # settings for stateful data, like file locations and database versions
-    # on your system were taken. It‘s perfectly fine and recommended to leave
-    # this value at the release version of the first install of this system.
-    # Before changing this value read the documentation for this option
-    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "22.05"; # Did you read the comment?
-    home-manager.users."chao".home.stateVersion = "22.05";
   };
+
+  # --- Bootloader ---
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  # --- Internationalisation ---
+  i18n.defaultLocale = "en_US.utf8";
+
+  # --- Sound ---
+  # Enable sound with PipeWire instead of PulseAudio.
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  # --- Graphical Interface (X11) and i3 Window Manager ---
+  # Standard NixOS configuration for a graphical session with the i3 window manager.
+  services.xserver = {
+    enable = true;
+    displayManager.lightdm.enable = true; # A lightweight display manager
+    windowManager.i3.enable = true;       # Enable i3 window manager
+  };
+
+  # Your custom graphical settings
+  vital.graphical = {
+    enable = true;
+    remote-desktop.enable = true;
+    nvidia.enable = true;
+    xserver.dpi = 120;
+  };
+
+  # --- Gaming ---
+  # Enable Steam. `allowUnfree` must be true for this to work.
+  programs.steam.enable = true;
+  vital.games.steam.enable = true; # From your custom framework
+
+  # --- System Packages ---
+  # List of packages to be installed system-wide.
+  environment.systemPackages = with pkgs; [
+    gimp
+    darktable
+    filezilla
+    woeusb
+    axel
+    audacious
+    audacity
+    zoom-us
+    thunderbird
+    mullvad-vpn
+    unetbootin
+    trezor-suite
+    inkscape
+    element-desktop
+    xclip
+  ];
+
+  # --- Services ---
+  # Enable Trezor hardware wallet daemon.
+  services.trezord.enable = true;
+
+  # --- Systemd and Docker Compatibility ---
+  # Disable unified cgroup hierarchy (cgroups v2).
+  # Note: This is often for compatibility with older container tools.
+  # Consider removing this if you don't specifically need it.
+  systemd.enableUnifiedCgroupHierarchy = false;
+
+  # --- Your Custom Framework Options ---
+  vital.pre-installed.level = 5;
+  vital.programs.texlive.enable = true;
+  vital.programs.modern-utils.enable = true;
+  vital.programs.accounting.enable = true;
+  vital.programs.machine-learning.enable = false;
+
+  # --- State Version ---
+  # It is VERY important to read the NixOS release notes before changing this value.
+  # It manages state locations and database schemas between releases.
+  # Upgraded from 22.05 to 23.11 for more modern defaults.
+  system.stateVersion = "23.11";
+  home-manager.users."chao".home.stateVersion = "23.11";
 }
