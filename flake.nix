@@ -2,9 +2,10 @@
   description = "Collection of my NixOS machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-    nixpkgs2105.url = "github:NixOS/nixpkgs/nixos-21.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs?rev=42aae6fa748a41ced37373fc6d914de512658178";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -15,16 +16,10 @@
     # Use nixos-home, with the same nixpkgs
     nixos-home.url = "github:forestschao/nixos-home";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-home.inputs.home-manager.follows = "home-manager";
 
     www-breakds-org.url = "github:breakds/www.breakds.org";
     www-breakds-org.inputs.nixpkgs.follows = "nixpkgs";
-
-    # wonder-devops.url = "git+ssh://git@github.com/quant-wonderland/devops-tools.git";
-    # wonder-devops.inputs.nixpkgs.follows = "nixpkgs2105";
-
-    # wonder-modules.url =
-    #   "git+ssh://git@github.com/quant-wonderland/wonder-modules?ref=dev/22.05";
-    # wonder-modules.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, vital-modules, nixos-home, ... }@inputs: {
@@ -33,8 +28,6 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          # vital-modules.nixosModules.iphone-connect
-          # vital-modules.nixosModules.docker
           nixos-home.nixosModules.chao-home
           ./machines/foundation
         ];
@@ -96,7 +89,6 @@
         ];
       };
 
-      # The twin leaner, Lothric (Younger Prince)
       lothric = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -106,7 +98,6 @@
         ];
       };
 
-      # The twin leaner, Lorian (Elder Prince)
       lorian = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -130,7 +121,6 @@
       hand = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          # Get the community maintained framework baseline
           nixos-hardware.nixosModules.framework-12th-gen-intel
           vital-modules.nixosModules.foundation
           vital-modules.nixosModules.laptop
@@ -149,18 +139,6 @@
         ];
       };
 
-      armlet = inputs.nixpkgs-unstable.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          nixos-hardware.nixosModules.raspberry-pi-4
-          vital-modules.nixosModules.users
-          vital-modules.nixosModules.graphical
-          # nixos-home.nixosModules.breakds-home
-          ./machines/pi/armlet
-        ];
-      };
-
-      # Containers
       fortress = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -169,16 +147,11 @@
       };
     };
 
-    # This is mainly for debugging and experiments purpose. Use this
-    # to expose packages that you want to debug.
-    packages."x86_64-linux" = let pkgs = import nixpkgs {
-      system = "x86_64-linux";
-      config.allowUnfree = true;
-      overlays = [
-        (import ./base/overlays)
-      ];
-    }; in {
+    packages."x86_64-linux" = let 
+      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+    in {
       inherit (pkgs) shuriken medea-clipper;
     };
   };
 }
+

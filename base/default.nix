@@ -25,7 +25,6 @@
 
   environment.systemPackages = with pkgs; [
     gparted pass samba
-  ] ++ lib.optionals config.vital.graphical.enable [
     feh
     jq
     google-chrome

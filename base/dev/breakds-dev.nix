@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -22,7 +22,6 @@
       mysql-client
       sqlitebrowser
       awscli
-      nixopsUnstable
       python3Packages.tensorboard
       pv  # pipe viewer
 
@@ -46,3 +45,4 @@
     };
   };
 }
+

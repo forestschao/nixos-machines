@@ -8,6 +8,7 @@
     ../../base/i3-session-breakds.nix # Assumed to be your custom i3 setup
     ../../base/dev/breakds-dev.nix
     ../../base/dev/vim.nix
+    ./workarounds.nix
   ];
 
   # Allow proprietary software. This is required for Steam and Nvidia drivers.
@@ -46,22 +47,36 @@
   # Standard NixOS configuration for a graphical session with the i3 window manager.
   services.xserver = {
     enable = true;
-    displayManager.lightdm.enable = true; # A lightweight display manager
-    windowManager.i3.enable = true;       # Enable i3 window manager
+    displayManager.lightdm.enable = true;
+    windowManager.i3.enable = true;
+
+    # Load the nvidia driver for X11
+    videoDrivers = [ "nvidia" ];
+
+    # # Configure your dual monitors on startup
+    # displayManager.setupCommands = ''
+    #   # Give the system a moment to ensure monitors are ready
+    #   sleep 2
+    #   # Set up the dual-monitor extended desktop
+    #   xrandr \
+    #     --output DP-4 --primary --mode 2560x1440 \
+    #     --output USB-C-0 --mode 2560x1440 --right-of DP-4
+    # '';
   };
 
-  # Your custom graphical settings
-  vital.graphical = {
-    enable = true;
-    remote-desktop.enable = true;
-    nvidia.enable = true;
-    xserver.dpi = 120;
+  # Configure the proprietary NVIDIA driver
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   # --- Gaming ---
   # Enable Steam. `allowUnfree` must be true for this to work.
   programs.steam.enable = true;
-  vital.games.steam.enable = true; # From your custom framework
+  programs.zsh.enable = true;
+  # vital.games.steam.enable = true; # From your custom framework
 
   # --- System Packages ---
   # List of packages to be installed system-wide.
@@ -81,6 +96,7 @@
     inkscape
     element-desktop
     xclip
+    home-manager
   ];
 
   # --- Services ---
@@ -91,14 +107,14 @@
   # Disable unified cgroup hierarchy (cgroups v2).
   # Note: This is often for compatibility with older container tools.
   # Consider removing this if you don't specifically need it.
-  systemd.enableUnifiedCgroupHierarchy = false;
+  # systemd.enableUnifiedCgroupHierarchy = false;
 
-  # --- Your Custom Framework Options ---
-  vital.pre-installed.level = 5;
-  vital.programs.texlive.enable = true;
-  vital.programs.modern-utils.enable = true;
-  vital.programs.accounting.enable = true;
-  vital.programs.machine-learning.enable = false;
+  # # --- Your Custom Framework Options ---
+  # vital.pre-installed.level = 5;
+  # vital.programs.texlive.enable = true;
+  # vital.programs.modern-utils.enable = true;
+  # vital.programs.accounting.enable = true;
+  # vital.programs.machine-learning.enable = false;
 
   # --- State Version ---
   # It is VERY important to read the NixOS release notes before changing this value.
