@@ -96,7 +96,7 @@
     inkscape
     element-desktop
     xclip
-    home-manager
+    home-manage
   ];
 
   # --- Services ---
@@ -108,13 +108,6 @@
   # Note: This is often for compatibility with older container tools.
   # Consider removing this if you don't specifically need it.
   # systemd.enableUnifiedCgroupHierarchy = false;
-
-  # # --- Your Custom Framework Options ---
-  # vital.pre-installed.level = 5;
-  # vital.programs.texlive.enable = true;
-  # vital.programs.modern-utils.enable = true;
-  # vital.programs.accounting.enable = true;
-  # vital.programs.machine-learning.enable = false;
 
   # --- State Version ---
   # It is VERY important to read the NixOS release notes before changing this value.
