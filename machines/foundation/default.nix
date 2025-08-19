@@ -96,7 +96,7 @@
     inkscape
     element-desktop
     xclip
-    home-manage
+    home-manager
   ];
 
   # --- Services ---
