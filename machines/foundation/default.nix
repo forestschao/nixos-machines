@@ -29,7 +29,17 @@
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   # --- Internationalisation ---
-  i18n.defaultLocale = "en_US.utf8";
+  # Set the default system language and enable the Fcitx5 input method.
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    inputMethod = {
+      enabled = "fcitx5";
+      fcitx5.addons = with pkgs; [
+        # Provides Pinyin, Shuangpin, Wubi, etc.
+        fcitx5-chinese-addons
+      ];
+    };
+  };
 
   # --- Sound ---
   # Enable sound with PipeWire instead of PulseAudio.
@@ -52,16 +62,6 @@
 
     # Load the nvidia driver for X11
     videoDrivers = [ "nvidia" ];
-
-    # # Configure your dual monitors on startup
-    # displayManager.setupCommands = ''
-    #   # Give the system a moment to ensure monitors are ready
-    #   sleep 2
-    #   # Set up the dual-monitor extended desktop
-    #   xrandr \
-    #     --output DP-4 --primary --mode 2560x1440 \
-    #     --output USB-C-0 --mode 2560x1440 --right-of DP-4
-    # '';
   };
 
   # Configure the proprietary NVIDIA driver
@@ -104,15 +104,10 @@
   services.trezord.enable = true;
 
   # --- Systemd and Docker Compatibility ---
-  # Disable unified cgroup hierarchy (cgroups v2).
-  # Note: This is often for compatibility with older container tools.
-  # Consider removing this if you don't specifically need it.
   # systemd.enableUnifiedCgroupHierarchy = false;
 
   # --- State Version ---
   # It is VERY important to read the NixOS release notes before changing this value.
-  # It manages state locations and database schemas between releases.
-  # Upgraded from 22.05 to 23.11 for more modern defaults.
   system.stateVersion = "23.11";
   home-manager.users."chao".home.stateVersion = "23.11";
 }
