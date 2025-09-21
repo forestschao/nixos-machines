@@ -16,11 +16,7 @@
   [
     roboto-mono
     font-awesome
-    
-    # --- THIS IS THE FIXED LINE ---
-    # 'nerd-fonts.fira-code' has been changed to 'fira-code-nerdfont'
     fira-code-nerdfont
-
     graphviz
     neofetch
     graphicsmagick
@@ -45,8 +41,11 @@
   
   programs.zsh = {
     enable = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+
+    package = pkgs.zsh;
+
+    # autosuggestion.enable = true;
+    # syntaxHighlighting.enable = true;
     enableCompletion = true;
     oh-my-zsh = {
       enable = true;
@@ -56,6 +55,7 @@
         "dotenv"
         "extract"  # decompression general command
         "z"
+        "zsh-syntax-highlighting"
       ];
     };
 

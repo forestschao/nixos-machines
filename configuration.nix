@@ -41,7 +41,6 @@
     users.users."chao" = {
       isNormalUser = true;
       extraGroups = [ "wheel" ];
-      shell = pkgs.zsh;
       openssh.authorizedKeys.keyFiles = [
         ./data/keys/chao.pub
       ];
@@ -68,8 +67,17 @@
     services.xserver = {
       enable = true;
       displayManager.lightdm.enable = true;
-      windowManager.i3.enable = true;
       videoDrivers = [ "nvidia" ];
+
+      desktopManager.session = [
+        {
+          name = "home-manager";
+          start = ''
+            ${pkgs.runtimeShell} $HOME/.hm-xsession &
+            waitPID=$!
+          '';
+        }
+      ];
     };
 
     hardware.nvidia = {
@@ -100,6 +108,8 @@
 
     # --- System Packages ---
     environment.systemPackages = with pkgs; [
+      i3-gaps
+      i3lock-fancy
       gimp
       darktable
       filezilla
