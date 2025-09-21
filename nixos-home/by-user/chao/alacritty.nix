@@ -41,7 +41,23 @@ in
       # Other settings
       font = {
         size = 12;
-        normal.family = "FiraCode Nerd Font";
+        normal = {
+          family = "Fira Code Mono NF";
+          style = "Regular";
+        };
+        bold = {
+          family = "Fira Code Mono NF";
+          style = "Bold";
+        };
+        italic = {
+          family = "Fira Code Mono NF";
+          style = "Italic";
+        };
+
+        glyph_offset = {
+          x = 0;
+          y = 0; 
+        };
       };
       window.opacity = 0.95;
     };

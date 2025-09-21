@@ -27,6 +27,7 @@
     programs.nix-ld.enable = true;
     programs.sysdig.enable = true;
     nix.extraOptions = ''
+      experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
     '';
@@ -41,6 +42,7 @@
     users.users."chao" = {
       isNormalUser = true;
       extraGroups = [ "wheel" ];
+      shell = pkgs.zsh;
       openssh.authorizedKeys.keyFiles = [
         ./data/keys/chao.pub
       ];
