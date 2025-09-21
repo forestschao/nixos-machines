@@ -1,0 +1,3 @@
+[submodule "nixos-home"]
+	path = nixos-home
+	url = ./nixos-home
