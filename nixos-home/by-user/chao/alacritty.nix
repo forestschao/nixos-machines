@@ -42,21 +42,16 @@ in
       font = {
         size = 12;
         normal = {
-          family = "Fira Code Mono NF";
+          family = "Roboto Mono";
           style = "Regular";
         };
         bold = {
-          family = "Fira Code Mono NF";
+          family = "Roboto Mono";
           style = "Bold";
         };
         italic = {
-          family = "Fira Code Mono NF";
+          family = "Roboto Mono";
           style = "Italic";
-        };
-
-        glyph_offset = {
-          x = 0;
-          y = 0; 
         };
       };
       window.opacity = 0.95;
