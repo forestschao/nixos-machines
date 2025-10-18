@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, hm, ... }:
 
 {
   imports = [
@@ -21,7 +21,12 @@
     neofetch
     graphicsmagick
     ffmpeg
+    fcitx5
+    fcitx5-configtool
+    fcitx5-gtk
+    fcitx5-chinese-addons
   ];
+
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
