@@ -1,4 +1,4 @@
-{ pkgs, hm, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -21,11 +21,14 @@
     neofetch
     graphicsmagick
     ffmpeg
-    fcitx5
-    fcitx5-configtool
-    fcitx5-gtk
-    fcitx5-chinese-addons
   ];
+
+  # Environment variables for input method
+  home.sessionVariables = {
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+  };
 
   programs.direnv = {
     enable = true;
