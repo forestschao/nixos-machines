@@ -3,80 +3,80 @@
 {
   config = {
     # --- Shells & Editors ---
-    programs.zsh.enable = true; #
-    programs.bash.enableCompletion = true; #
-    environment.variables.EDITOR = "vim"; #
+    programs.zsh.enable = true;
+    programs.bash.enableCompletion = true;
+    environment.variables.EDITOR = "vim";
 
     # --- System Packages ---
     environment.systemPackages = with pkgs;
       [
         # Desktop Packages
-        i3-gaps #
-        i3lock-fancy #
-        feh #
-        scrot #
-        remmina #
-        xclip #
+        i3-gaps
+        i3lock-fancy
+        feh
+        scrot
+        remmina
+        xclip
         
         # Utility and Development Tools
-        home-manager #
-        gparted #
-        jq #
-        gitAndTools.gitFull #
-        nixpkgs-review #
-        pdftk #
-        pv #
-        dmidecode #
-        sysstat #
-        linuxPackages.perf #
-        perf-tools #
-        flamegraph #
+        home-manager
+        gparted
+        jq
+        gitAndTools.gitFull
+        nixpkgs-review
+        pdftk
+        pv
+        dmidecode
+        sysstat
+        linuxPackages.perf
+        perf-tools
+        flamegraph
         
         # Editors and related
-        meld #
-        tig #
-        ledger #
+        meld
+        tig
+        ledger
         
         # Media and Graphics
-        gimp #
-        darktable #
-        graphicsmagick #
-        inkscape #
-        ffmpeg #
-        audacious #
-        audacity #
+        gimp
+        darktable
+        graphicsmagick
+        inkscape
+        ffmpeg
+        audacious
+        audacity
         
         # Networking and File Transfer
-        filezilla #
-        axel #
-        mullvad-vpn #
-        google-chrome #
+        filezilla
+        axel
+        mullvad-vpn
+        google-chrome
         
         # Virtualization/Boot
-        woeusb #
-        unetbootin #
+        woeusb
+        unetbootin
         
         # Communication/Chat/Email
-        zoom-us #
-        thunderbird #
-        element-desktop #
+        zoom-us
+        thunderbird
+        element-desktop
         
         # Security/Crypto
-        trezor-suite #
-        pass #
+        trezor-suite
+        pass
         
         # Server/Database/Web
-        samba #
-        hugo #
-        quickserve #
-        mysql-client #
-        sqlitebrowser #
-        awscli #
-        python3Packages.tensorboard #
+        samba
+        hugo
+        quickserve
+        mysql-client
+        sqlitebrowser
+        awscli
+        python3Packages.tensorboard
         
         # Programming/Math
-        graphviz #
-        sbcl #
+        graphviz
+        sbcl
 
         # Neovim with custom configuration
         (neovim.override {
